@@ -3,7 +3,7 @@
 
 Meu nome é Lucas Montes, natural do Rio de Janeiro. Nos meus estudos sou movido pelo poder de criação e transformação da tecnologia. Atualmente, sou monitor da disciplina Fundamentos da Computação e concentro meus estudos no desenvolvimento web, na parte de back-end.
 
-### Apresento Projetos nas seguintes linguagens 
+### Interesses e Projetos nas seguintes linguagens 
 
 - Python
 - PHP
