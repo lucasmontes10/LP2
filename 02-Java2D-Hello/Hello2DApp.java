@@ -25,9 +25,6 @@ class Hello2DFrame extends JFrame {
     public void paint (Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        int[] xValues = { 200, 250, 225};
-        int[] yValues = { 165, 165, 140};
-        Polygon poligono = new Polygon(xValues, yValues, 3);
         // aumento a linha
         g2d.setStroke(new BasicStroke(2));
         int w = getWidth();
@@ -76,6 +73,9 @@ class Hello2DFrame extends JFrame {
         // //desenhando um retangulo pintado
         // g2d.drawOval(0, 0, 100, 150);
         // //desenhando um circulo sem ser pintado
+        int[] xValues = { 200, 250, 225};
+        int[] yValues = { 165, 165, 140};
+        Polygon poligono = new Polygon(xValues, yValues, 3);
         g2d.setColor(Color.yellow);
         g2d.fillPolygon(poligono);
         // g2d.drawLine(0,0, w,h);
