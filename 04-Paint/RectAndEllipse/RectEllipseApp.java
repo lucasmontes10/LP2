@@ -1,8 +1,14 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+package RectAndEllipse;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Ellipse2D.Double;
+
+import javax.swing.JFrame;
 
 class RectEllipseApp {
     public static void main (String[] args) {
@@ -63,7 +69,7 @@ class Rect {
         this.h = h;
     }
 
-    void print () {
+	void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);
     }

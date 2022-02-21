@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="01-Hello"/>
+	<classpathentry kind="src" path="02-Java2D-Hello"/>
+	<classpathentry kind="src" path="03-Rect"/>
+	<classpathentry excluding="2.2.2/" kind="src" path="04-Paint"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
