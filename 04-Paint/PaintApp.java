@@ -24,19 +24,19 @@ class PaintFrame extends JFrame {
         this.setTitle("Painting Figures");
         this.setSize(350, 350);
         this.setVisible(true);
-        this.r1 = new Rect(30,40, 100,30);
-        this.r2 = new Rect(60, 80, 70, 20);
-        this.r3 = new Rect(120, 150, 80, 70);
-        this.r4 = new Rect(50, 150, 20, 40);
+        this.r1 = new Rect(30,40, 100,30, new Color(0, 255, 0), new Color(255, 0, 0));
+        this.r2 = new Rect(60, 80, 70, 20, new Color(117, 0, 0), new Color(117, 169, 0));
+        this.r3 = new Rect(120, 150, 80, 70, new Color(80, 93, 195), new Color(3, 129, 9));
+        this.r4 = new Rect(50, 150, 20, 40, new Color(152, 129, 9), new Color(152, 202, 236));
     }
 
     public void paint (Graphics g) {
         super.paint(g);
         //Documentacao: g, back, line
-        this.r1.paint(g, new Color(0, 255, 0), new Color(255, 0, 0));
-        this.r2.paint(g, new Color(117, 0, 0), new Color(117, 169, 0));
-        this.r3.paint(g, new Color(80, 93, 195), new Color(3, 129, 9));
-        this.r4.paint(g, new Color(152, 129, 9), new Color(152, 202, 236));
+        this.r1.paint(g);
+        this.r2.paint(g);
+        this.r3.paint(g);
+        this.r4.paint(g);
     }
 }
 
@@ -45,11 +45,13 @@ class Rect {
     int w, h;
     Color back, line;
 
-    Rect (int x, int y, int w, int h) {
+    Rect (int x, int y, int w, int h, Color back, Color line) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.back = back;
+        this.line = line;
     }
 
     void print () {
@@ -57,10 +59,8 @@ class Rect {
             this.w, this.h, this.x, this.y);
     }
 
-    void paint (Graphics g, Color back, Color line) {
+    void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        this.back = back;
-        this.line = line;
         g2d.setStroke(new BasicStroke(7));
         g2d.setColor(this.line);
         g2d.drawRect(this.x,this.y, this.w,this.h);

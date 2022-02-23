@@ -11,6 +11,7 @@ public class CubeApp {
         float a = ler.nextFloat();
 		Cube c1 = new Cube(c, l, a);
         c1.print();
+        ler.close();
 	}
 }
 
