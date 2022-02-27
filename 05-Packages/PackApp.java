@@ -6,6 +6,7 @@ import figures.*;
 import figures.Rect; //Por algum motivo o vscode tava considerando a classe de Rect de
 //outra pasta, mais precisamente 03-Rect, ao fazer a importação individual consegui resolver
 
+//Foi adicionado o Losangulo
 class PackApp {
     public static void main (String[] args) {
         PackFrame frame = new PackFrame();
