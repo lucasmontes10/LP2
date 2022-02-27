@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class Hello2DApp {
     public static void main (String[] args) {
-        Hello2DFrame frame = new Hello2DFrame();
     }
 }
 
@@ -28,7 +27,6 @@ class Hello2DFrame extends JFrame {
         // aumento a linha
         g2d.setStroke(new BasicStroke(2));
         int w = getWidth();
-        int h = getHeight();
         g2d.setPaint(Color.green);
         g2d.fillRect(0, 300, w, 50);
         g2d.setPaint(Color.black);
