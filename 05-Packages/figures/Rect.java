@@ -2,8 +2,8 @@ package figures;
 import java.awt.*;
 
 public class Rect {
-    int x, y;
-    int w, h;
+    private int x, y;
+    private int w, h;
 
     public Rect (int x, int y, int w, int h) {
         this.x = x;
