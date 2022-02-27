@@ -9,5 +9,6 @@
 	<classpathentry kind="src" path="02-Java2D-Hello"/>
 	<classpathentry kind="src" path="03-Rect"/>
 	<classpathentry excluding="2.2.2/" kind="src" path="04-Paint"/>
+	<classpathentry kind="src" path="05-Packages"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
