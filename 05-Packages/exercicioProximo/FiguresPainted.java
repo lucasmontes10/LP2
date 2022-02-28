@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import exercicioProximo.figures.*;
 
+//Repositorio em relação ao exercício 2.3.2
+
 public class FiguresPainted {
     public static void main (String[] args) {
         PackFrame frame = new PackFrame();
