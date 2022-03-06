@@ -15,18 +15,15 @@ class ListApp
 	}	
 }
 
-class ListFrame extends JFrame
-{
+class ListFrame extends JFrame{
 	ArrayList<Rect> rs = new ArrayList<Rect>();
 	ArrayList<Ellipse> es = new ArrayList<Ellipse>();
     ArrayList<Losangulo> lo = new ArrayList<Losangulo>();
 	Random rand = new Random();
 	
-	ListFrame() 
-	{
+	ListFrame() {
 		this.addWindowListener (
-		    new WindowAdapter() 
-		    {
+		    new WindowAdapter() {
 		        public void windowClosing (WindowEvent e) {
 		            System.exit(0);
 		        }
