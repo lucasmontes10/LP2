@@ -30,7 +30,7 @@ class PackFrame extends JFrame {
         this.setTitle("Java Packages");
         this.setSize(350, 350);
         this.r1 = new Rect(30,40, 100,30);
-        this.e1 = new Ellipse(50,100, 100,30);
+        this.e1 = new Ellipse(50,100, 100,30, new Color(90, 202, 236), new Color(195, 128, 236));
         //Documentacao: x, y, w, h
         this.l1 = new Losangulo(100, 170, 100, 60);
         this.l2 = new Losangulo(250, 55, 110, 80);
