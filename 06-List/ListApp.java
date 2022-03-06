@@ -18,7 +18,7 @@ class ListApp
 class ListFrame extends JFrame{
 	ArrayList<Rect> rs = new ArrayList<Rect>();
 	ArrayList<Ellipse> es = new ArrayList<Ellipse>();
-    ArrayList<Losangulo> lo = new ArrayList<Losangulo>();
+    	ArrayList<Losangulo> lo = new ArrayList<Losangulo>();
 	Random rand = new Random();
 	
 	ListFrame() {
@@ -64,7 +64,7 @@ class ListFrame extends JFrame{
 		);
 		this.getContentPane().setBackground(Color.WHITE);
 		this.setTitle("Lista de Figuras");
-        this.setSize(1500, 1500);
+        	this.setSize(1500, 1500);
 	}
 
 	public void paint(Graphics g)
