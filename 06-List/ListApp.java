@@ -75,8 +75,8 @@ class ListFrame extends JFrame{
 		for( Ellipse e: this.es){
 			e.paint(g);
 		}
-        	for( Losangulo l: this.lo){
-            		l.paint(g);
-        	}
+        for( Losangulo l: this.lo){
+            l.paint(g);
+        }
 	}
 }
