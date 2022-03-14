@@ -48,8 +48,8 @@ typedef struct{
 void Triangulo_print (Triangulo * this){
 	Figure* sup = (Figure*)	this;
 	printf("Coordenadas do triangulo: (%d, %d), (%d, %d), (%d, %d)\n", sup->x, sup->y, this->x1, this->y1, this->x2, this->y2);
-//	printf("A cor do triangulo em rgb: Line (%d, %d, %d) Back(%d, %d, %d)",
-//	sup->line->r, sup->line->g, sup->line->b, sup->bg->r, sup->bg->g, sup->bg->b);
+	printf("A cor do triangulo em rgb: Line (%d, %d, %d) Back(%d, %d, %d)\n",
+	sup->line.r, sup->line.g, sup->line.b, sup->bg.r, sup->bg.g, sup->bg.b);
 		
 }
 
@@ -60,12 +60,12 @@ Triangulo* triangulo_new (int x, int y, int w, int h, int r_line, int g_line, in
     sup->print = (Figure_Print) Triangulo_print;
     sup->x = x;
     sup->y = y;
-//    sup->line->r = r_line;
-//    sup->line->g = g_line;
-//	sup->line->b = b_line;
-//    sup->bg->r = r_back;
-//    sup->bg->g = g_back;
-//    sup->bg->b = b_back;
+    sup->line.r = r_line;
+    sup->line.g = g_line;
+	sup->line.b = b_line;
+    sup->bg.r = r_back;
+    sup->bg.g = g_back;
+    sup->bg.b = b_back;
     this->x1 = x-w;
 	this->y1 = y+w;
 	this->x2 = x+w;
