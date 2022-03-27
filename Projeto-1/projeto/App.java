@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import figurePack.*;
 
+//CheckList: 
+//-Criar a figura na posição do mouse - ok
+//Selecionar determinada figura - Fazendo
+
 public class App {
     public static void main(String[] args)
 	{
@@ -21,8 +25,11 @@ class ListFrame extends JFrame{
     Random rand = new Random();
     Figures focus = null;
     //Pegando a posição do mouse
-    Point localMouse;
-    Point supMouse;
+    MouseEvent localMouse = null;
+    MouseEvent supMouse = null;
+
+    int defaultH = 100;
+	int defaultW = 100;
     
     ListFrame () {
         this.addWindowListener (
@@ -32,15 +39,25 @@ class ListFrame extends JFrame{
                 }
             }
         );
+
         this.addMouseListener(
             new MouseAdapter(){
                 public void mousePressed(MouseEvent evt){
+                    int xAtual = (int) evt.getClientX();
+                    int yAtual = (int) evt.getClientY();
                     focus = null;
                     for (Figures fig: figs){
                         //Preciso ver se o mouse esta no limite das figuras
-                        if((evt.getClientX() >= fig.x && evt.getClientX() <= fig.x + fig.w) && (evt.getClientY() <= fig.y && evt.getClientY() <= fig.y + fig.h)){
+                        if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual <= fig.y && yAtual <= fig.y + fig.h)){
+                            //Estabelecendo a figura selecionada
                             focus = fig;
+                            break;
                         }
+                    }
+                }
+                public void mouseReleased(MouseEvent evt){
+                    if (focus != null){
+                        focus = null;
                     }
                 }
             }
@@ -51,13 +68,16 @@ class ListFrame extends JFrame{
 			new KeyAdapter() {
 				public void keyPressed(KeyEvent evt)
 				{
-                    // int x = (int) localMouse.getX();
-                    int x = rand.nextInt(255);
+                    // int x = (int) localMouse.getClientX();
+                    // int x = rand.nextInt(255);
+                    // System.out.print(x);
 
-                    // int y = (int) localMouse.getY();
-                    int y = rand.nextInt(255);
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
+                    // int y = (int) localMouse.getClientY();
+                    // int y = rand.nextInt(255);
+                    Point mouseAtual = MouseInfo.getPointerInfo().getLocation();
+
+                    int w = defaultW;
+                    int h = defaultH;
                     int r_line = rand.nextInt(255);
                     int g_line = rand.nextInt(255);
                     int b_line = rand.nextInt(255);
@@ -65,25 +85,27 @@ class ListFrame extends JFrame{
                     int g_back = rand.nextInt(255);
                     int b_back = rand.nextInt(255);
                     if( evt.getKeyChar() == 'r'){ 
-                        figs.add( new Rect(x, y, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Rect((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if( evt.getKeyChar() == 'e'){
-                        figs.add( new Ellipse(x, y, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Ellipse((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if( evt.getKeyChar() == 'l' ){
-                        figs.add(new Losangulo(x, y, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add(new Losangulo((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if (evt.getKeyChar() == 't'){
-                        figs.add(new Triangulo(x, y, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                        figs.add(new Triangulo((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
                         repaint();
                     }
 			    }
 		    }
 			
 		);
+
+
         this.getContentPane().setBackground(Color.WHITE);
 		this.setTitle("Lista de Figuras");
         this.setSize(1500, 1500);
@@ -99,7 +121,7 @@ class ListFrame extends JFrame{
     }
     public void desenharRectSuporte(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(10));
         g2d.setColor(new Color(255, 0, 0));
         //Desenhar o retangulo em volta da figura selecionada
         g2d.drawRect(focus.x - 5, focus.y - 5, focus.w + 10, focus.h + 10);
