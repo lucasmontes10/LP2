@@ -51,7 +51,6 @@ class ListFrame extends JFrame{
                     for (Figures fig: figs){
                         //Preciso ver se o mouse esta no limite das figuras
                         if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
-                            System.out.print("entrei aqui");
                             //Estabelecendo a figura selecionada
                             focus = fig;
                             break;
@@ -104,6 +103,15 @@ class ListFrame extends JFrame{
                     if (evt.getKeyChar() == 't'){
                         figs.add(new Triangulo((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
                         repaint();
+                    }
+                    //Adicionando a função de excluir a figura em foco
+                    if ((evt.getKeyCode() == KeyEvent.VK_DELETE)){
+                        if (focus != null){
+                            //Função de array list, justamente para excluir o elemento selecionado
+                            figs.remove(focus);
+                            focus = null;
+                            repaint();
+                        }
                     }
 			    }
 		    }
