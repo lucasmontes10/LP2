@@ -7,6 +7,7 @@
 ## Para excluir determinada figura basta clicar na desejada e apertar a tecla DELETE do seu declado
 
 
+### Avanços:
 
 - [x] Criar a figura onde está o mouse
 - [x] Selecionar o objeto com o mouse
