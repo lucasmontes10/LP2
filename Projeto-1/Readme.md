@@ -1,10 +1,10 @@
-### Projeto Editor Gráfico vetorial
+# Projeto Editor Gráfico vetorial
 
-### MANUAL - Comandos
+## MANUAL - Comandos
 
-## Para adicionar uma figura basta posicionar o mouse no local desejado e utilizar as teclas: e para elipse, t para triangulo, l para losangulo e r para retângulo
+### Para adicionar uma figura basta posicionar o mouse no local desejado e utilizar as teclas: e para elipse, t para triangulo, l para losangulo e r para retângulo
 
-## Para excluir determinada figura basta clicar na desejada e apertar a tecla DELETE do seu declado
+### Para excluir determinada figura basta clicar na desejada e apertar a tecla DELETE do seu declado
 
 
 ### Avanços:
