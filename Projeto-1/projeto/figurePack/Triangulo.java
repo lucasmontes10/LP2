@@ -15,7 +15,7 @@ public class Triangulo extends Figures{
     public void paint (Graphics g) {
 
         Graphics2D g2d = (Graphics2D)g;
-		g2d.setStroke(new BasicStroke(4));
+		g2d.setStroke(new BasicStroke(2));
 		int x[] = {this.x, this.x-w, this.x+w};
 		int y[] = {this.y, this.y+w, this.y+w};
 		

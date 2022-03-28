@@ -15,7 +15,7 @@ public class Losangulo extends Figures {
 
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(2));
         g2d.setColor(this.colorLine);
         g2d.drawPolygon(this.xPoints, this.yPoints, 4);
         g2d.setColor(this.colorBack);

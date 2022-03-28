@@ -17,7 +17,7 @@ public class Ellipse extends Figures{
         Graphics2D g2d = (Graphics2D)g;
         
         //Aumentar a linha
-        g2d.setStroke(new BasicStroke(7));
+        g2d.setStroke(new BasicStroke(2));
 	
 	    g2d.setColor(this.colorLine);
         g2d.draw(new Ellipse2D.Double(this.x,this.y, this.w,this.h));

@@ -1,8 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 
-import org.w3c.dom.events.MouseEvent;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,9 +25,10 @@ class ListFrame extends JFrame{
     ArrayList<Figures> figs = new ArrayList<Figures>();
     Random rand = new Random();
     Figures focus = null;
-    //Pegando a posição do mouse
-    MouseEvent localMouse = null;
-    MouseEvent supMouse = null;
+    Figures auxFig = null;
+
+    Point currentPoint = null;
+    Point previousPoint = null;
 
     int defaultH = 100;
 	int defaultW = 100;
@@ -43,22 +45,25 @@ class ListFrame extends JFrame{
         this.addMouseListener(
             new MouseAdapter(){
                 public void mousePressed(MouseEvent evt){
-                    int xAtual = (int) evt.getClientX();
-                    int yAtual = (int) evt.getClientY();
+                    int xAtual = (int) evt.getX();
+                    int yAtual = (int) evt.getY();
                     focus = null;
                     for (Figures fig: figs){
                         //Preciso ver se o mouse esta no limite das figuras
-                        if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual <= fig.y && yAtual <= fig.y + fig.h)){
+                        if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
+                            System.out.print("entrei aqui");
                             //Estabelecendo a figura selecionada
                             focus = fig;
                             break;
+                        }else{
+                            focus = null;
+                            auxFig = null;
                         }
                     }
+                    repaint();
                 }
                 public void mouseReleased(MouseEvent evt){
-                    if (focus != null){
-                        focus = null;
-                    }
+
                 }
             }
         );
@@ -121,8 +126,8 @@ class ListFrame extends JFrame{
     }
     public void desenharRectSuporte(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(10));
-        g2d.setColor(new Color(255, 0, 0));
+        g2d.setStroke(new BasicStroke(5));
+        g2d.setColor(Color.red);
         //Desenhar o retangulo em volta da figura selecionada
         g2d.drawRect(focus.x - 5, focus.y - 5, focus.w + 10, focus.h + 10);
     }
