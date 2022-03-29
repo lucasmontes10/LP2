@@ -1,9 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-
-
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -110,6 +107,36 @@ class ListFrame extends JFrame{
                             //Função de array list, justamente para excluir o elemento selecionado
                             figs.remove(focus);
                             focus = null;
+                            repaint();
+                        }
+                    }
+
+                    //Adicionando a função de mover as figuras com as setas
+
+                    if (evt.getKeyCode() == KeyEvent.VK_UP){
+                        if (focus != null){
+                            //Modificando o y
+                            focus.y -= 5;
+                            repaint();
+                        }
+                    }
+
+                    if (evt.getKeyCode() == KeyEvent.VK_DOWN){
+                        if (focus != null){
+                            focus.y += 5;
+                            repaint();
+                        }
+                    }
+
+                    if (evt.getKeyCode() == KeyEvent.VK_LEFT){
+                        if (focus != null){
+                            focus.x -= 5;
+                            repaint();
+                        }
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_RIGHT){
+                        if (focus != null){
+                            focus.x += 5;
                             repaint();
                         }
                     }

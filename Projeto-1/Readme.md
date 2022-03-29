@@ -6,6 +6,8 @@
 
 ### Para excluir determinada figura basta clicar na desejada e apertar a tecla DELETE do seu declado
 
+### Uma vez selecionada a figura com o mouse, é possível mover com as setas do teclado
+
 
 ### Avanços:
 
