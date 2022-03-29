@@ -8,6 +8,8 @@
 
 ### Uma vez selecionada a figura com o mouse, é possível mover com as setas do teclado
 
+### Também é possível arrastar a figura selecionando com o mouse e arrastando para o local desejado
+
 
 ### Avanços:
 
