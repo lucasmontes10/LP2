@@ -63,7 +63,18 @@ class ListFrame extends JFrame{
                 }
             }
         );
-
+        //Adicionando a funcionalidade de mover com o mouse
+        this.addMouseMotionListener(
+            new MouseMotionAdapter(){
+                public void mouseDragged(MouseEvent evt){
+                    if(focus !=null){
+                        focus.x = (int) evt.getX();
+                        focus.y = (int) evt.getY();
+                        repaint();
+                    }
+                }
+            }
+        );
 
         this.addKeyListener(
 			new KeyAdapter() {
