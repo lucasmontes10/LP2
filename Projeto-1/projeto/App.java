@@ -10,7 +10,9 @@ import figurePack.*;
 
 //CheckList: 
 //-Criar a figura na posição do mouse - ok
-//Selecionar determinada figura - Fazendo
+//Selecionar determinada figura - ok, parcialmente
+//Fazendo a cor da figura: utilizaremos JColorChooser que está presente no pacote AWT
+
 
 public class App {
     public static void main(String[] args)
@@ -160,6 +162,24 @@ class ListFrame extends JFrame{
                     if (evt.getKeyCode() == KeyEvent.VK_RIGHT){
                         if (focus != null){
                             focus.x += 5;
+                            repaint();
+                        }
+                    }
+
+                    if (evt.getKeyChar() == 'f'){
+                        //Modificando a propriedade de cor de fundo
+                        if (focus != null){
+                            Color novaCor = JColorChooser.showDialog(null, "Escolha a cor", focus.colorBack);
+                            focus.colorBack = novaCor;
+                            repaint();
+                        }
+                    }
+
+                    if (evt.getKeyChar() == 'b'){
+                        //modificando a propriedade de cor de linha
+                        if (focus != null){
+                            Color novaCor = JColorChooser.showDialog(null, "Escolha a cor", focus.colorLine);
+                            focus.colorLine = novaCor;
                             repaint();
                         }
                     }
