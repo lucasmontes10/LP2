@@ -89,9 +89,14 @@ class ListFrame extends JFrame{
                     // int y = (int) localMouse.getClientY();
                     // int y = rand.nextInt(255);
                     Point mouseAtual = MouseInfo.getPointerInfo().getLocation();
-                    // MouseEvent mouseAtual = null;
-                    int xAtual = (int) mouseAtual.getX();
-                    int yAtual = (int) mouseAtual.getY();
+                   
+                    // int xAtual = (int) mouseAtual.getX();
+                    // int yAtual = (int) mouseAtual.getY();
+                    // MouseEvent mouse = null;
+                    
+                    // Point mouseAtual = mouse.getPoint();
+
+
 
                     int w = defaultW;
                     int h = defaultH;
@@ -102,19 +107,19 @@ class ListFrame extends JFrame{
                     int g_back = rand.nextInt(255);
                     int b_back = rand.nextInt(255);
                     if( evt.getKeyChar() == 'r'){ 
-                        figs.add( new Rect( xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Rect( (int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if( evt.getKeyChar() == 'e'){
-                        figs.add( new Ellipse(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Ellipse((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if( evt.getKeyChar() == 'l' ){
-                        figs.add(new Losangulo(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add(new Losangulo((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         repaint();
                     }
                     if (evt.getKeyChar() == 't'){
-                        figs.add(new Triangulo(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                        figs.add(new Triangulo((int) mouseAtual.getX(), (int) mouseAtual.getY(), w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
                         repaint();
                     }
                     //Adicionando a função de excluir a figura em foco
