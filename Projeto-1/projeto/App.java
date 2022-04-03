@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Random;
 import figurePack.*;
 
@@ -12,6 +13,7 @@ import figurePack.*;
 //-Criar a figura na posição do mouse - ok
 //Selecionar determinada figura - ok, parcialmente
 //Fazendo a cor da figura: utilizaremos JColorChooser que está presente no pacote AWT
+//Configurando o z-index
 
 
 public class App {
@@ -46,20 +48,44 @@ class ListFrame extends JFrame{
         this.addMouseListener(
             new MouseAdapter(){
                 public void mousePressed(MouseEvent evt){
+                    //Implementando o zindex no nosso projeto
                     int xAtual = (int) evt.getX();
                     int yAtual = (int) evt.getY();
-                    focus = null;
-                    for (Figures fig: figs){
+                    //funcionalidade do z-index
+                    for (int i = figs.size()-1; i>=0; i--){
+                        Figures fig = figs.get(i);
                         //Preciso ver se o mouse esta no limite das figuras
                         if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
                             //Estabelecendo a figura selecionada
                             focus = fig;
+                            figs.remove(focus);
+                            figs.add(focus);
                             break;
                         }else{
                             focus = null;
                             auxFig = null;
                         }
                     }
+
+                    // if (focus == null){
+                    //     ListIterator<Figures> item = figs.listIterator(figs.size());
+                    //     Figures fig = null;
+                    //     while (item.hasPrevious()){
+                    //         fig = item.previous();
+                    //         if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
+                    //             focus = fig;
+                    //             int index = figs.indexOf(focus);
+                    //             //Trocando de posição no array
+                    //             figs.remove(index);
+                    //             figs.add(focus);
+                    //             break;
+                    //         } else{
+                    //             //Repetindo o do comentario
+                    //             focus = null;
+                    //             auxFig = null;
+                    //         }
+                    //     }
+                    
                     repaint();
                 }
                 public void mouseReleased(MouseEvent evt){
