@@ -2,25 +2,39 @@
 
 ## MANUAL - Comandos
 
-### Para adicionar uma figura basta posicionar o mouse no local desejado e utilizar as teclas: e para elipse, t para triangulo, l para losangulo e r para retângulo
 
-### Para excluir determinada figura basta clicar na desejada e apertar a tecla DELETE do seu declado
+## Criar Figuras: basta posicionar o mouse na posição desejada e utilizar as seguintes teclas:
 
-### Uma vez selecionada a figura com o mouse, é possível mover com as setas do teclado, e alterar sua cor de fundo ao apertar a tecla f, com a figura selecionada, abrirá um tela e você seleciona a cor desejada, ao apertar a tecla b, a cor de linha é trocada
+### e : Criar uma elipse
+### r : Criar um retângulo
+### l : Criar um losângulo 
+### t : Criar um triângulo
+
+<br/>
 
 
-### Também é possível arrastar a figura selecionando com o mouse e arrastando para o local desejado
+## Para selecionar a figura basta clicar com botão esquerdo do mouse nela, e com ela em foco pode-se realizar as seguintes propriedades:
 
 
+### Tecla DELETE para deletar a figura em foco
+### Tecla f para modificar a cor de fundo da figura
+### Tecla b para modificar o contorno da figura
+### Teclas + e - para aumentar e diminuir o tamanho da figura, respectivamente
+### Utilizar as setas do teclado para mover a figura, ou utilizar o mouse para o movimento
+### Tecla Tab para mudar o foco da figura 
+
+
+
+
+<br/>
 
 ### Avanços:
 
 - [x] Criar a figura onde está o mouse
 - [x] Selecionar o objeto com o mouse
 - [x] Excluindo a figura selecionada com DEL
-- [ ] Posição, tamanho e z-order
+- [x] Posição, tamanho e z-order
 - [x] Cor de contorno e cor de fundo
-- [ ] Resolver problema de foco com triângulo e Losangulo
 
 
 
