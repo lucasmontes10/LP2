@@ -20,4 +20,19 @@ public abstract class Figures {
 
     public abstract void paint (Graphics g);
     public abstract void print();
+
+    public void redimensionar(int tx, int ty){
+        this.w = tx - this.x;
+        this.h = ty - this.y;
+    }
+
+    public boolean focusToRize (int x, int y) {
+        return(x == this.x + this.w && y == this.y + this.h);
+    }
+
+    public void drag (int tx, int ty, int xf, int yf) {
+        this.x = (tx - xf);
+        this.y = (ty - yf);
+    }
+
 }
