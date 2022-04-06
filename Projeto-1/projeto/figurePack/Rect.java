@@ -26,4 +26,8 @@ public class Rect extends Figures{
         g2d.fillRect(this.x, this.y, this.w, this.h);
         
     }
+
+    public boolean contain (int x, int y){
+        return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
+    }
 }

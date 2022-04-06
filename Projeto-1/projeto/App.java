@@ -21,6 +21,7 @@ import java.awt.Point;
 //Selecionar determinada figura - ok, parcialmente
 //Fazendo a cor da figura: utilizaremos JColorChooser que está presente no pacote AWT
 //Configurando o z-index
+//Redimensionar a figura a selecionada - OK
 
 
 public class App {
@@ -40,9 +41,16 @@ class ListFrame extends JFrame{
 
     Point currentPoint = null;
     Point previousPoint = null;
+    Point posMouse = null;
     
     int defaultH = 100;
 	int defaultW = 100;
+    int distX, distY;
+
+    int i = 0;
+
+    boolean rectMiniFocus = false;
+    Rect miniRect = new Rect (0, 0, 12, 12, Color.red, Color.white);
     
     ListFrame () {
         this.addWindowListener (
@@ -59,10 +67,15 @@ class ListFrame extends JFrame{
                     //Implementando o zindex no nosso projeto
                     int xAtual = (int) evt.getX();
                     int yAtual = (int) evt.getY();
+                    
+                    //Pegando o posicionamento
+                    posMouse = getMousePosition();
+
                     //funcionalidade do z-index
 
                     for (int i = figs.size()-1; i>=0; i--){
                         Figures fig = figs.get(i);
+                        rectMiniFocus = false;
                         //Preciso ver se o mouse esta no limite das figuras
                         if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
                             //Estabelecendo a figura selecionada
@@ -70,30 +83,14 @@ class ListFrame extends JFrame{
                             figs.remove(focus);
                             figs.add(focus);
                             break;
+                        }else if(miniRect.contain(xAtual, yAtual)){
+                            rectMiniFocus = true;
+                            distX = miniRect.x - xAtual;
+                            distY = miniRect.y - yAtual;
                         }else{
                             focus = null;
-                            auxFig = null;
                         }
                     }
-
-                    // if (focus == null){
-                    //     ListIterator<Figures> item = figs.listIterator(figs.size());
-                    //     Figures fig = null;
-                    //     while (item.hasPrevious()){
-                    //         fig = item.previous();
-                    //         if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
-                    //             focus = fig;
-                    //             int index = figs.indexOf(focus);
-                    //             //Trocando de posição no array
-                    //             figs.remove(index);
-                    //             figs.add(focus);
-                    //             break;
-                    //         } else{
-                    //             //Repetindo o do comentario
-                    //             focus = null;
-                    //             auxFig = null;
-                    //         }
-                    //     }
                     
                     repaint();
                 }
@@ -103,67 +100,33 @@ class ListFrame extends JFrame{
         this.addMouseMotionListener(
             new MouseMotionAdapter(){
                 public void mouseDragged(MouseEvent evt){
+                    Point novaPos = getMousePosition();
                     //iremos fazer o redisionamento
-                    if(focus !=null){
-                        focus.x = (int) evt.getX();
-                        focus.y = (int) evt.getY();
-                        repaint();
+
+                    if(rectMiniFocus){
+                        if (evt.getX() >= focus.x && evt.getY() >= focus.y){
+                            figs.remove(focus);
+                            focus.w += novaPos.x - posMouse.x;
+                            focus.h += novaPos.y - posMouse.y;
+                            figs.add(focus);
+                            repaint();
+                            posMouse.x = novaPos.x;
+                            posMouse.y = novaPos.y;
+                        }
+                    }else{
+                        if(focus !=null){
+                            focus.x = (int) evt.getX();
+                            focus.y = (int) evt.getY();
+                            repaint();
+                        }
                     }
                 }
-            //     public void mouseDragged(MouseEvent evt){
-			// 	    Point currentPt = evt.getPoint();
-
-			//    	    if (pos == -1)
-        	// 			return;
-        	// 	    if( pos != 2){
-            //             points[pos].x = currentPt.x; 
-          	// 			points[pos].y = currentPt.y;
-
-          	// 			int otherEnd = (pos==1)?2:1;
-
-
-            //             double newPoint2X = points[otherEnd].getX() + (points[pos].getX() - points[otherEnd].getX())/2;
-            //             double newPoint2Y = points[otherEnd].getY() + (points[pos].getY() - points[otherEnd].getY())/2;
-
-            //             points[2].x = newPoint2X; 
-            //             points[2].y = newPoint2Y;
-
-			// 	   		focus.w = (int)Math.abs(points[1].getCenterX()-points[0].getCenterX());
-			// 	   		focus.h = (int)Math.abs(points[1].getCenterY()-points[0].getCenterY());
-        	// 		}else{
-        	// 				//System.out.printf("Drag %d\n",pos);
-            //             Double deltaX = currentPt.x - lastPoints[2].getX();
-          	// 			Double deltaY = currentPt.y - lastPoints[2].getY();
-            //             for(int j = 0; j < 3; j++){
-			// 	   		 	points[j].x = lastPoints[j].getX() + deltaX;
-			// 	   		 	points[j].y = lastPoints[j].getY() + deltaY;
-			// 	   		}
-			// 	   		focus.x = (int)points[0].getCenterX();
-			// 	   		focus.y = (int)points[0].getCenterY();
-        	// 		}
-
-			//    	    repaint();
-			//    	}
-		 
 			}  
         );
 
         this.addKeyListener(
 			new KeyAdapter() {
 				public void keyPressed(KeyEvent evt){
-                    // int x = (int) localMouse.getClientX();
-                    // int x = rand.nextInt(255);
-                    // System.out.print(x);
-
-                    // int y = (int) localMouse.getClientY();
-                    // int y = rand.nextInt(255);
-                    // Point mouseAtual = MouseInfo.getPointerInfo().getLocation();
-                   
-                    // int xAtual = (int) mouseAtual.getX();
-                    // int yAtual = (int) mouseAtual.getY();
-                    // MouseEvent mouse = null;
-                    
-                    // Point mouseAtual = mouse.getPoint();
 
                     Point p = MouseInfo.getPointerInfo().getLocation();
                     int xAtual = p.x - getLocation().x;
@@ -267,15 +230,22 @@ class ListFrame extends JFrame{
                         }
                     }
 
-                    if (evt.getKeyCode() == KeyEvent.VK_TAB){
+                    if (evt.getKeyCode() == 32){
                         if(focus != null){
-                            int i;
-                            if(figs.indexOf(focus) == figs.size() - 1){
-                                i = 0;
-                            }else{
-                                i = figs.indexOf(focus) - 1;
+                            // int i;
+                            // if(figs.indexOf(focus) + 1 == figs.size() - 1){
+                            //     i = 0;
+                            // }else{
+                            //     i = figs.indexOf(focus) - 1;
+                            // }
+                            // focus = figs.get(i);
+                            if (figs.size() > 0){
+                                focus = figs.get(i);
+                                i++;
                             }
-                            focus = figs.get(i);
+                            if (i >= figs.size()){
+                                i = 0;
+                            }
                         }
                         repaint();
                     }
@@ -296,6 +266,9 @@ class ListFrame extends JFrame{
         }
         if(focus != null){
             desenharRectSuporte(g);
+            miniRect.x = (focus.x - 4) + (focus.w + 10) - 8;
+            miniRect.y = (focus.y - 5) + (focus.h + 10) - 8;
+            miniRect.paint(g);
         }
     }
     public void desenharRectSuporte(Graphics g){
@@ -304,19 +277,5 @@ class ListFrame extends JFrame{
         g2d.setColor(Color.red);
         //Desenhar o retangulo em volta da figura selecionada
         g2d.drawRect(focus.x - 5, focus.y - 5, focus.w + 10, focus.h + 10);
-        //Desenhar os retangulos para resize
-
-        // int x,y; 
-        // int w,h;
-		// x = focus.x; 
-        // y = focus.y;
-		// w = focus.w; 
-        // h = focus.h;
-		// points[0].x = (double)x-SIZE; points[0].y = (double)y-SIZE;
-		// points[1].x = (double)x+w; points[1].y = (double)y+h; 
-		// points[2].x = (double)((x+w)+(x-SIZE))/2; points[2].y = (double)((y+h)+y-SIZE)/2;
-        // for (int i = 0; i < points.length; i++) {
-        //     g2d.fill(points[i]);
-        // }
     }
 }
