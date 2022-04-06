@@ -19,9 +19,9 @@
 ### Tecla DELETE para deletar a figura em foco
 ### Tecla f para modificar a cor de fundo da figura
 ### Tecla b para modificar o contorno da figura
-### Teclas + e - para aumentar e diminuir o tamanho da figura, respectivamente
+### Modifique o tamanho com o mouse 
 ### Utilizar as setas do teclado para mover a figura, ou utilizar o mouse para o movimento
-### Tecla Tab para mudar o foco da figura 
+### Tecla SPACE para mudar o foco da figura 
 
 
 
