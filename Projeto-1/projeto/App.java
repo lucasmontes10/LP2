@@ -248,6 +248,8 @@ class ListFrame extends JFrame{
                             if (figs.size() > 0){
                                 focus = figs.get(i);
                                 i++;
+                                figs.remove(focus);
+                                figs.add(focus);
                             }
                             if (i >= figs.size()){
                                 i = 0;
