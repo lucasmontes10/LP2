@@ -29,6 +29,7 @@ public class App {
 	{
 		ListFrame frame = new ListFrame();
 		frame.setVisible(true);
+        frame.setFocusTraversalKeysEnabled(false);
 	}	
 }
 
@@ -235,7 +236,7 @@ class ListFrame extends JFrame{
                         }
                     }
 
-                    if (evt.getKeyCode() == 32){
+                    if (evt.getKeyCode() == KeyEvent.VK_TAB){
                         if(focus != null){
                             // int i;
                             // if(figs.indexOf(focus) + 1 == figs.size() - 1){
