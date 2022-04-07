@@ -21,7 +21,7 @@
 ### Tecla b para modificar o contorno da figura
 ### Modifique o tamanho com o mouse 
 ### Utilizar as setas do teclado para mover a figura, ou utilizar o mouse para o movimento
-### Tecla SPACE para mudar o foco da figura 
+### Tecla TAB para mudar o foco da figura 
 
 
 
