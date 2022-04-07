@@ -20,5 +20,5 @@ public abstract class Figures {
 
     public abstract void paint (Graphics g);
     public abstract void print();
-
+    public abstract boolean contain (int x, int y);
 }

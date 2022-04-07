@@ -17,7 +17,7 @@ public class Rect extends Figures{
         Graphics2D g2d = (Graphics2D) g;
         
         //consertar/ajustar bordas
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(4));
         
         g2d.setColor(this.colorLine);
         g2d.drawRect(this.x,this.y, this.w,this.h);

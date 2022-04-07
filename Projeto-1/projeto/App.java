@@ -46,6 +46,7 @@ class ListFrame extends JFrame{
     int defaultH = 100;
 	int defaultW = 100;
     int distX, distY;
+    int moverFigX, moverFigY;
 
     int i = 0;
 
@@ -77,11 +78,14 @@ class ListFrame extends JFrame{
                         Figures fig = figs.get(i);
                         rectMiniFocus = false;
                         //Preciso ver se o mouse esta no limite das figuras
-                        if((xAtual >= fig.x && xAtual <= fig.x + fig.w) && (yAtual >= fig.y && yAtual <= fig.y + fig.h)){
+                        if(fig.contain(xAtual, yAtual)){
                             //Estabelecendo a figura selecionada
                             focus = fig;
                             figs.remove(focus);
                             figs.add(focus);
+                            //Calculo do mouse preparando para mover
+                            moverFigX = xAtual - fig.x;
+                            moverFigY = yAtual - fig.y;
                             break;
                         }else if(miniRect.contain(xAtual, yAtual)){
                             rectMiniFocus = true;
@@ -115,8 +119,9 @@ class ListFrame extends JFrame{
                         }
                     }else{
                         if(focus !=null){
-                            focus.x = (int) evt.getX();
-                            focus.y = (int) evt.getY();
+                            //Consertando o clique
+                            focus.x = (int) evt.getX() - moverFigX;
+                            focus.y = (int) evt.getY() - moverFigY;
                             repaint();
                         }
                     }
