@@ -146,20 +146,41 @@ class ListFrame extends JFrame{
                     int r_back = rand.nextInt(255);
                     int g_back = rand.nextInt(255);
                     int b_back = rand.nextInt(255);
+
                     if( evt.getKeyChar() == 'r'){ 
-                        figs.add( new Rect( xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Rect( xAtual - w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        if (figs.size() > 1){
+                            focus = figs.get(figs.size() - 1);
+                            figs.remove(focus);
+                            figs.add(focus);
+                        }
                         repaint();
                     }
                     if( evt.getKeyChar() == 'e'){
-                        figs.add( new Ellipse(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add( new Ellipse(xAtual- w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        if (figs.size() > 1){
+                            focus = figs.get(figs.size() - 1);
+                            figs.remove(focus);
+                            figs.add(focus);
+                        }
                         repaint();
                     }
                     if( evt.getKeyChar() == 'l' ){
-                        figs.add(new Losangulo(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        figs.add(new Losangulo(xAtual - w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        if (figs.size() > 1){
+                            focus = figs.get(figs.size() - 1);
+                            figs.remove(focus);
+                            figs.add(focus);
+                        }                        
                         repaint();
                     }
                     if (evt.getKeyChar() == 't'){
-                        figs.add(new Triangulo(xAtual, yAtual, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                        figs.add(new Triangulo(xAtual- w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                        if (figs.size() > 1){
+                            focus = figs.get(figs.size() - 1);
+                            figs.remove(focus);
+                            figs.add(focus);
+                        }
                         repaint();
                     }
                     //Adicionando a função de excluir a figura em foco
