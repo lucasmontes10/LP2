@@ -27,7 +27,7 @@ public class Ellipse extends Figures{
         
     }
 
-    public boolean contain (int x, int y){
+    public boolean clicked (int x, int y){
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
 }

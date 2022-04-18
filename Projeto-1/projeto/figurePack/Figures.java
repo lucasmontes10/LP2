@@ -3,8 +3,10 @@ package figurePack;
 import java.awt.Graphics;
 import java.awt.*;
 
+import ivisible.IVisible;
 
-public abstract class Figures {
+
+public abstract class Figures implements IVisible {
     public int x, y;
     public int w, h;
     public Color colorLine, colorBack;
@@ -18,7 +20,8 @@ public abstract class Figures {
         this.colorBack = colorBack;
     }
 
-    public abstract void paint (Graphics g);
     public abstract void print();
-    public abstract boolean contain (int x, int y);
+    public boolean clicked (int x, int y){
+        return (x>=this.x && x <= this.x + this.w && y >=this.y && y <=this.y+this.h);
+    }
 }

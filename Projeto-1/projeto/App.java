@@ -79,7 +79,7 @@ class ListFrame extends JFrame{
                         Figures fig = figs.get(i);
                         rectMiniFocus = false;
                         //Preciso ver se o mouse esta no limite das figuras
-                        if(fig.contain(xAtual, yAtual)){
+                        if(fig.clicked(xAtual, yAtual)){
                             //Estabelecendo a figura selecionada
                             focus = fig;
                             figs.remove(focus);
@@ -88,7 +88,7 @@ class ListFrame extends JFrame{
                             moverFigX = xAtual - fig.x;
                             moverFigY = yAtual - fig.y;
                             break;
-                        }else if(miniRect.contain(xAtual, yAtual)){
+                        }else if(miniRect.clicked(xAtual, yAtual)){
                             rectMiniFocus = true;
                             distX = miniRect.x - xAtual;
                             distY = miniRect.y - yAtual;

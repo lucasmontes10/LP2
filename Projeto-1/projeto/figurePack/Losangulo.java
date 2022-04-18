@@ -21,7 +21,7 @@ public class Losangulo extends Figures {
         g2d.setColor(this.colorBack);
         g2d.fillPolygon(this.xPoints, this.yPoints, 4);
     }
-    public boolean contain (int x, int y){
+    public boolean clicked (int x, int y){
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
 }
