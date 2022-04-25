@@ -4,11 +4,11 @@ import java.awt.geom.Ellipse2D;
 import java.awt.BasicStroke;
 
 public class Ellipse extends Figures{
-    public Ellipse (int x, int y, int w, int h, Color colorLine, Color colorBack) {
+    private Ellipse (int x, int y, int w, int h, Color colorLine, Color colorBack) {
         super(x, y, w, h, colorLine, colorBack);
     }
     
-    public void print(){
+    private void print(){
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);
     }
