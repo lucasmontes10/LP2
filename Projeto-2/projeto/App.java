@@ -319,7 +319,7 @@ class ListFrame extends JFrame{
     public void paint (Graphics g) {
         super.paint(g);
         for (Figures fig: this.figs) {
-            fig.paint(g);
+            fig.paint(g, fig.equals(selectedFigure));
         }
         if(focus != null){
             desenharRectSuporte(g);
