@@ -23,7 +23,6 @@ public abstract class Figures implements IVisible, Serializable {
         this.colorBack = colorBack;
     }
 
-    public abstract void print();
     public boolean clicked (int x, int y){
         return (x>=this.x && x <= this.x + this.w && y >=this.y && y <=this.y+this.h);
     }
