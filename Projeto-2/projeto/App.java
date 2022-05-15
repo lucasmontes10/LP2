@@ -19,11 +19,12 @@ import java.io.ObjectInputStream;
 
 import button_.*;
 import toolbox.*;
-import save.*;
 
 
 //Avanços:
 //Salvando em arquivo
+//Ajustando a toolbar e os botões
+
 
 public class App {
     public static void main(String[] args)
@@ -103,10 +104,9 @@ class ListFrame extends JFrame{
             }
         });
 
-        buttons.add(new Button_(1, new Rect(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
-		buttons.add(new Button_(2, new Losangulo(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
-		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
-		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
+        buttons.add(new Button_(1, new Rect(1, 2, 3, 4, Color.BLACK, Color.BLACK)) );
+		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)) );
+		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, Color.BLACK, Color.BLACK)) );
 					      
 		mainToolbox = new Toolbox(10, 50, buttons);
 
@@ -118,88 +118,79 @@ class ListFrame extends JFrame{
                 }
             }
         );
-        // binario bin = new binario();
-        // this.addWindowListener(
-        //     new WindowAdapter() {
-        //         public void windowClosing(WindowEvent e){
-        //             bin.salvarArquivo("proj.bin", figs);
-        //             System.exit(0);
-        //         }
-        //     }
-        // );
 
-        // this.addMouseListener(
-        //     new MouseAdapter(){
-        //         public void mousePressed(MouseEvent evt) {
-        //             currentPoint = evt.getPoint();
-        //             for(Button_ bt: buttons){
-        //                 if( bt.clicked( (int)currentPoint.getX(), (int)currentPoint.getY() ) ){
-        //                     buttonId = bt.id;
-        //                     repaint();
-        //                     return;
-        //                 }
-        //             }
+        this.addMouseListener(
+            new MouseAdapter(){
+                public void mousePressed(MouseEvent evt) {
+                    currentPoint = evt.getPoint();
+                    for(Button_ bt: buttons){
+                        if( bt.clicked( (int)currentPoint.getX(), (int)currentPoint.getY() ) ){
+                            buttonId = bt.id;
+                            repaint();
+                            return;
+                        }
+                    }
                     
-        //             if( buttonId != -1){
-        //                 int x = (int)currentPoint.getX();
-        //                 int y = (int)currentPoint.getY();
-        //                 if(buttonId == 1)
-        //                     figs.add(new Rect(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
-        //                 else if( buttonId == 2)
-        //                     figs.add(new Losangulo(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
-        //                 else if( buttonId == 3)
-        //                     figs.add(new Ellipse(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
-        //                 else if(buttonId == 4)
-        //                     figs.add(new Triangulo(1, 2, 3, -1, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                    if( buttonId != -1){
+                        int x = (int)currentPoint.getX();
+                        int y = (int)currentPoint.getY();
+                        if(buttonId == 1)
+                            figs.add(new Rect(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        else if( buttonId == 2)
+                            figs.add(new Losangulo(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                        else if( buttonId == 3)
+                            figs.add(new Ellipse(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                        else if(buttonId == 4)
+                            figs.add(new Triangulo(1, 2, 3, -1, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
                             
-        //                 buttonId = -1;
-        //                 repaint();
-        //                 return;
-        //             }
-        //             boolean flag1 = false;
-        //             boolean flag2 = false;
-        //             for (int i = 0; i < points.length; i++) {
-        //                 if (points[i].contains(prevPt)) {
-        //                 pos = i;
-        //                 flag1 = true;
+                        buttonId = -1;
+                        repaint();
+                        return;
+                    }
+                    boolean flag1 = false;
+                    boolean flag2 = false;
+                    for (int i = 0; i < points.length; i++) {
+                        if (points[i].contains(prevPt)) {
+                        pos = i;
+                        flag1 = true;
                         
-        //                 //System.out.printf("point %d\n",pos);
+                        //System.out.printf("point %d\n",pos);
                         
-        //                 for(int j = 0; j < 3; j++){
-        //                     lastPoints[j] = new Point2D.Double(points[j].getX(), points[j].getY());
-        //                 }
+                        for(int j = 0; j < 3; j++){
+                            lastPoints[j] = new Point2D.Double(points[j].getX(), points[j].getY());
+                        }
                         
-        //                 break;
-        //                 }
-        //             }
+                        break;
+                        }
+                    }
                     
-        //             ListIterator<Figures> li = figs.listIterator(figs.size());
-        //             Figures fig = null;
-        //             while(li.hasPrevious()){
-        //                 fig = li.previous();
+                    ListIterator<Figures> li = figs.listIterator(figs.size());
+                    Figures fig = null;
+                    while(li.hasPrevious()){
+                        fig = li.previous();
                         
-        //                 if( fig.clicked((int)prevPt.getX(), (int)prevPt.getY())){
-        //                     flag2 = true;
-        //                     focus = fig;
-        //                     int index = figs.indexOf(focus);
-        //                     figs.remove(index);
-        //                     figs.add(focus);
-        //                     break;
-        //                 }
-        //             }
+                        if( fig.clicked((int)prevPt.getX(), (int)prevPt.getY())){
+                            flag2 = true;
+                            focus = fig;
+                            int index = figs.indexOf(focus);
+                            figs.remove(index);
+                            figs.add(focus);
+                            break;
+                        }
+                    }
                         
-        //             if( !flag1 && !flag2){
-        //                 focus = null;
-        //             }
+                    if( !flag1 && !flag2){
+                        focus = null;
+                    }
                 
-        //             repaint();
-        //         }
+                    repaint();
+                }
                 
-        //         public void mouseReleased(MouseEvent evt){
-        //             pos = -1;	
-        //         }
-        //     }
-		// );
+                public void mouseReleased(MouseEvent evt){
+                    pos = -1;	
+                }
+            }
+		);
 
         this.addMouseListener(
             new MouseAdapter(){

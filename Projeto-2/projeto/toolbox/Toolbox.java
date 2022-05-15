@@ -27,22 +27,22 @@ public class Toolbox {
 		BasicStroke bs1 = new BasicStroke(6, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER);
 		g2d.setStroke(bs1);
         
-        	g2d.setColor( Color.BLACK);
-        	g2d.drawRect(this.x, this.y, w, h);
-        
-        	g2d.setColor(Color.LIGHT_GRAY);
-        	g2d.fillRect( this.x,  this.y,  w,  h);
-        	
-        	int x = this.x + 8;
-        	int y = this.y + 8;
-        	boolean isSelected = false;
+		g2d.setColor( Color.BLACK);
+		g2d.drawRect(this.x, this.y, w, h);
+	
+		g2d.setColor(Color.LIGHT_GRAY);
+		g2d.fillRect(this.x,  this.y,  w,  h);
+		
+		int x = this.x + 8;
+		int y = this.y + 8;
+		boolean isSelected = false;
 
-        	for( Button_ bt: this.buttons){
-        		bt.fig.x = x;		
-        		bt.fig.y = y;
-        		y = y + 40;
-        		
+		for(Button_ bt: this.buttons){
+			bt.fig.x = x;		
+			bt.fig.y = y;
+			y = y + 40;
+			
 			bt.paint(g, bt.id == selectedId);
-        	}
+		}
 	}
 }

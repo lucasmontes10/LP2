@@ -6,18 +6,21 @@ import figurePack.Figures;
 import java.awt.*;
 
 public class Button_ implements IVisible{
+    static int SPC = 20;
+    static int DIM = 40;
+    static int PAD = 4;
+
+
     public int id;
     public Figures fig;
     
     public Button_ (int id, Figures fig){
         this.id = id;
         this.fig = fig;
-        if( fig.h != -1){
-        	this.fig.w = this.fig.h = 32;
-        }
-        else{
-        	this.fig.w = 32;
-        }	
+        this.fig.x = PAD+SPC;
+        this.fig.y = PAD+SPC + id*DIM;
+        this.fig.w = DIM-PAD*2;
+        this.fig.h = DIM-PAD*2;
     }
 
     public boolean clicked (int x, int y){
