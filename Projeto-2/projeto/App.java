@@ -14,6 +14,16 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Point;
 
 import java.io.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
+import button_.*;
+import toolbox.*;
+import save.*;
+
+
+//Avanços:
+//Salvando em arquivo
 
 public class App {
     public static void main(String[] args)
@@ -27,9 +37,10 @@ public class App {
 
 class ListFrame extends JFrame{
 
-    JToolBar toolbar = new JToolBar("Comandos");
-
     ArrayList<Figures> figs = new ArrayList<Figures>();
+    ArrayList<Button_> buttons = new ArrayList<Button_>();
+
+	Toolbox mainToolbox;
     Random rand = new Random();
     Figures focus = null;
     Figures auxFig = null;
@@ -37,18 +48,69 @@ class ListFrame extends JFrame{
     Point currentPoint = null;
     Point previousPoint = null;
     Point posMouse = null;
+    int SIZE = 8;
     
     int defaultH = 100;
 	int defaultW = 100;
     int distX, distY;
     int moverFigX, moverFigY;
-
+    int pos = -1;
+    Point prevPt = null;
+    Point2D[] lastPoints = new Point2D[3];
+	Rectangle2D.Double[] points = {	new Rectangle2D.Double(50, 50, SIZE, SIZE),  new Rectangle2D.Double(150, 100, SIZE, SIZE), new Rectangle2D.Double(100, 75, SIZE, SIZE) };
     int i = 0;
 
     boolean rectMiniFocus = false;
     Rect miniRect = new Rect (0, 0, 12, 12, Color.red, Color.white);
+
+    int r_line = rand.nextInt(255);
+    int g_line = rand.nextInt(255);
+    int b_line = rand.nextInt(255);
+    int r_back = rand.nextInt(255);
+    int g_back = rand.nextInt(255);
+    int b_back = rand.nextInt(255);
+
+    int buttonId = -1;
     
     ListFrame () {
+
+        try{
+			FileInputStream f = new FileInputStream("proj.bin");
+			ObjectInputStream o = new ObjectInputStream(f);
+
+			this.figs = (ArrayList<Figures>)o.readObject();
+			o.close();
+
+		}catch(Exception x){
+			System.out.println("ERRO! ao abrir arquivo");
+			System.out.println(x.getMessage());
+		}
+
+        this.addWindowListener (
+            new WindowAdapter() {
+                public void windowClosing(WindowEvent windowEvent) {
+                    try {
+                        FileOutputStream file = new FileOutputStream("proj.bin");
+                        ObjectOutputStream object = new ObjectOutputStream(file);
+                        object.writeObject(figs);
+                        object.flush();
+                        object.close();
+                    }catch (Exception e) {
+                        System.out.print(e);
+                        System.out.println(e.getMessage());
+                }
+                System.exit(0);
+            }
+        });
+
+        buttons.add(new Button_(1, new Rect(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
+		buttons.add(new Button_(2, new Losangulo(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
+		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
+		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back))) );
+					      
+		mainToolbox = new Toolbox(10, 50, buttons);
+
+
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -56,40 +118,88 @@ class ListFrame extends JFrame{
                 }
             }
         );
+        // binario bin = new binario();
+        // this.addWindowListener(
+        //     new WindowAdapter() {
+        //         public void windowClosing(WindowEvent e){
+        //             bin.salvarArquivo("proj.bin", figs);
+        //             System.exit(0);
+        //         }
+        //     }
+        // );
 
-        try{
-			FileInputStream f = new FileInputStream("proj.bin");
-			ObjectInputStream o = new ObjectInputStream(f);
-
-			this.figs = (ArrayList<Figures>)o.readObject();
-
-			o.close();
-
-		}catch(Exception x){
-			System.out.println("ERRO! ao abrir arquivo");
-			System.out.println(x.getMessage());
-
-		}
-
-        this.addWindowListener(
-            new WindowAdapter(){
-                public void windowClosing (WindowEvent e){
-                    try{
-                        FileOutputStream f = new FileOutputStream("proj.bin");
-                        ObjectOutputStream o = new ObjectOutputStream(f);
-                        o.writeObject(figs);
-                        o.flush();
-                        o.close();
-
-                    }
-                    catch(Exception x){
-                        System.out.println("ERRO! ao salvar arquivo");
-                        System.out.println(x.getMessage());
-                    }
-                    System.exit(0);
-                }
-		    }
-        );
+        // this.addMouseListener(
+        //     new MouseAdapter(){
+        //         public void mousePressed(MouseEvent evt) {
+        //             currentPoint = evt.getPoint();
+        //             for(Button_ bt: buttons){
+        //                 if( bt.clicked( (int)currentPoint.getX(), (int)currentPoint.getY() ) ){
+        //                     buttonId = bt.id;
+        //                     repaint();
+        //                     return;
+        //                 }
+        //             }
+                    
+        //             if( buttonId != -1){
+        //                 int x = (int)currentPoint.getX();
+        //                 int y = (int)currentPoint.getY();
+        //                 if(buttonId == 1)
+        //                     figs.add(new Rect(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+        //                 else if( buttonId == 2)
+        //                     figs.add(new Losangulo(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+        //                 else if( buttonId == 3)
+        //                     figs.add(new Ellipse(1, 2, 3, 4, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+        //                 else if(buttonId == 4)
+        //                     figs.add(new Triangulo(1, 2, 3, -1, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
+                            
+        //                 buttonId = -1;
+        //                 repaint();
+        //                 return;
+        //             }
+        //             boolean flag1 = false;
+        //             boolean flag2 = false;
+        //             for (int i = 0; i < points.length; i++) {
+        //                 if (points[i].contains(prevPt)) {
+        //                 pos = i;
+        //                 flag1 = true;
+                        
+        //                 //System.out.printf("point %d\n",pos);
+                        
+        //                 for(int j = 0; j < 3; j++){
+        //                     lastPoints[j] = new Point2D.Double(points[j].getX(), points[j].getY());
+        //                 }
+                        
+        //                 break;
+        //                 }
+        //             }
+                    
+        //             ListIterator<Figures> li = figs.listIterator(figs.size());
+        //             Figures fig = null;
+        //             while(li.hasPrevious()){
+        //                 fig = li.previous();
+                        
+        //                 if( fig.clicked((int)prevPt.getX(), (int)prevPt.getY())){
+        //                     flag2 = true;
+        //                     focus = fig;
+        //                     int index = figs.indexOf(focus);
+        //                     figs.remove(index);
+        //                     figs.add(focus);
+        //                     break;
+        //                 }
+        //             }
+                        
+        //             if( !flag1 && !flag2){
+        //                 focus = null;
+        //             }
+                
+        //             repaint();
+        //         }
+                
+        //         public void mouseReleased(MouseEvent evt){
+        //             pos = -1;	
+        //         }
+        //     }
+		// );
 
         this.addMouseListener(
             new MouseAdapter(){
@@ -168,12 +278,14 @@ class ListFrame extends JFrame{
 
                     int w = defaultW;
                     int h = defaultH;
+
                     int r_line = rand.nextInt(255);
                     int g_line = rand.nextInt(255);
                     int b_line = rand.nextInt(255);
                     int r_back = rand.nextInt(255);
                     int g_back = rand.nextInt(255);
                     int b_back = rand.nextInt(255);
+    
 
                     if( evt.getKeyChar() == 'r'){ 
                         figs.add( new Rect( xAtual - w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
@@ -318,14 +430,15 @@ class ListFrame extends JFrame{
     }
     public void paint (Graphics g) {
         super.paint(g);
+        mainToolbox.Show(g, buttonId);
         for (Figures fig: this.figs) {
-            fig.paint(g, fig.equals(selectedFigure));
+            fig.paint(g, fig.equals(focus));
         }
         if(focus != null){
             desenharRectSuporte(g);
             miniRect.x = (focus.x - 4) + (focus.w + 10) - 8;
             miniRect.y = (focus.y - 5) + (focus.h + 10) - 8;
-            miniRect.paint(g);
+            miniRect.paint(g, true);
         }
     }
     public void desenharRectSuporte(Graphics g){
