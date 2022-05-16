@@ -102,10 +102,9 @@ class ListFrame extends JFrame{
         buttons.add(new Button_(2, new Superelipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)));
 		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)) );
 		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, Color.BLACK, Color.BLACK)) );
-					      
+		buttons.add(new Button_(5, new imageFIg("./icones/lixeira.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));      
 		mainToolbox = new Toolbox(10, 50, buttons);
-
-
+        
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -172,7 +171,14 @@ class ListFrame extends JFrame{
                             figs.add(new Ellipse(xAtual - defaultW / 2, yAtual - defaultH/ 2, defaultW, defaultH, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         else if(buttonId == 4)
                             figs.add(new Triangulo(xAtual - defaultW / 2, yAtual - defaultH/ 2, defaultW, defaultH, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)));
-                            
+                        else if (buttonId == 5){
+                            if (focus != null){
+                                //Função de array list, justamente para excluir o elemento selecionado
+                                figs.remove(focus);
+                                focus = null;
+                                repaint();
+                            }
+                        }
                         buttonId = -1;
                         repaint();
                         return;
@@ -221,7 +227,7 @@ class ListFrame extends JFrame{
                 }
             }
         );
-        //Adicionando a funcionalidade de mover com o mouse e resize
+        //Adicionando a funcionalidade de mover com o mouse e p
         this.addMouseMotionListener(
             new MouseMotionAdapter(){
                 public void mouseDragged(MouseEvent evt){
