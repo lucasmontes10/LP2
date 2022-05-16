@@ -102,7 +102,8 @@ class ListFrame extends JFrame{
         buttons.add(new Button_(2, new Superelipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)));
 		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)) );
 		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, Color.BLACK, Color.BLACK)) );
-		buttons.add(new Button_(5, new imageFIg("./icones/lixeira.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));      
+		buttons.add(new Button_(5, new imageFIg("./icones/lixeira.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));  
+        buttons.add(new Button_(6, new imageFIg("./icones/lata-de-tinta.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));    
 		mainToolbox = new Toolbox(10, 50, buttons);
         
         this.addWindowListener (
@@ -176,6 +177,13 @@ class ListFrame extends JFrame{
                                 //Função de array list, justamente para excluir o elemento selecionado
                                 figs.remove(focus);
                                 focus = null;
+                                repaint();
+                            }
+                        }
+                        else if (buttonId == 6){
+                            if (focus != null){
+                                Color novaCor = JColorChooser.showDialog(null, "Escolha a cor", focus.colorBack);
+                                focus.colorBack = novaCor;
                                 repaint();
                             }
                         }
