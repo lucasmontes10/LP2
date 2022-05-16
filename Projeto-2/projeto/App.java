@@ -195,47 +195,47 @@ class ListFrame extends JFrame{
                         repaint();
                         return;
                     }
-                    boolean flag1 = false;
-                    boolean flag2 = false;
-                    for (int i = 0; i < points.length; i++) {
-                        if (points[i].contains(prevPt)) {
-                            pos = i;
-                            flag1 = true;
+                    // boolean flag1 = false;
+                    // boolean flag2 = false;
+                //     for (int i = 0; i < points.length; i++) {
+                //         if (points[i].contains(prevPt)) {
+                //             pos = i;
+                //             flag1 = true;
                                 
-                            //System.out.printf("point %d\n",pos);
+                //             //System.out.printf("point %d\n",pos);
                                 
-                            for(int j = 0; j < 3; j++){
-                                lastPoints[j] = new Point2D.Double(points[j].getX(), points[j].getY());
-                            }
+                //             for(int j = 0; j < 3; j++){
+                //                 lastPoints[j] = new Point2D.Double(points[j].getX(), points[j].getY());
+                //             }
                                 
-                            break;
-                        }
-                    }
+                //             break;
+                //         }
+                //     }
 
-                    ListIterator<Figures> li = figs.listIterator(figs.size());
-                    Figures fig = null;
-                    while(li.hasPrevious()){
-                        fig = li.previous();
+                //     ListIterator<Figures> li = figs.listIterator(figs.size());
+                //     Figures fig = null;
+                //     while(li.hasPrevious()){
+                //         fig = li.previous();
                             
-                        if(fig.clicked(xAtual, yAtual)){
-                            flag2 = true;
-                            focus = fig;
-                            int index = figs.indexOf(focus);
-                            figs.remove(index);
-                            figs.add(focus);
-                            break;
-                        }
-                    }
+                //         if(fig.clicked(xAtual, yAtual)){
+                //             flag2 = true;
+                //             focus = fig;
+                //             int index = figs.indexOf(focus);
+                //             figs.remove(index);
+                //             figs.add(focus);
+                //             break;
+                //         }
+                //     }
                             
-                    if(!flag1 && !flag2){
-                        focus = null;
-                    }
+                //     if(!flag1 && !flag2){
+                //         focus = null;
+                //     }
                     
-                    repaint();
-                }
+                //     repaint();
+                // }
                     
-                public void mouseReleased(MouseEvent evt){
-                    pos = -1;	
+                // public void mouseReleased(MouseEvent evt){
+                //     pos = -1;	
                 }
             }
         );
@@ -271,7 +271,7 @@ class ListFrame extends JFrame{
         this.addKeyListener(
 			new KeyAdapter() {
 				public void keyPressed(KeyEvent evt){
-
+                
                     Point p = MouseInfo.getPointerInfo().getLocation();
                     int xAtual = p.x - getLocation().x;
                     int yAtual = p.y - getLocation().y;
@@ -503,14 +503,8 @@ class ListFrame extends JFrame{
 					";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");
 				}
 				else if( fig instanceof Triangulo){
-					String points = String.format("%d,%d %d,%d %d,%d",
-					 				  fig.x, fig.y,
-					 				  fig.x-(int)(fig.w/2.0), fig.y+fig.w,
-									  fig.x+(int)(fig.w/2.0), fig.y+fig.w);
-
-					Writer.write("<polygon points=\""+ points +"\" "+ 
-							"style=\"fill:"+ BackrgbColor +
-							";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");	
+					String points = String.format("%d,%d %d,%d %d,%d", fig.x, fig.y, fig.x-(int)(fig.w/2.0), fig.y+fig.w, fig.x+(int)(fig.w/2.0), fig.y+fig.w);
+					Writer.write("<polygon points=\""+ points +"\" "+ "style=\"fill:"+ BackrgbColor + ";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");	
 				}
 			}
       		Writer.write("</svg>");
