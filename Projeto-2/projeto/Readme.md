@@ -7,7 +7,7 @@
 
 ### e : Criar uma elipse
 ### r : Criar um retângulo
-### l : Criar um losângulo 
+### u : Criar uma Superelipse
 ### t : Criar um triângulo
 
 <br/>
@@ -23,18 +23,18 @@
 ### Utilizar as setas do teclado para mover a figura, ou utilizar o mouse para o movimento
 ### Tecla TAB para mudar o foco da figura 
 
+<br/>
 
+## Adicionando um menu no canto da tela:
 
+### Ao selecionar determinada figura no menu, depois basta clicar onde você deseja criar
 
 <br/>
 
-### Avanços:
+## Extras:
 
-- [x] Criar a figura onde está o mouse
-- [x] Selecionar o objeto com o mouse
-- [x] Excluindo a figura selecionada com DEL
-- [x] Posição, tamanho e z-order
-- [x] Cor de contorno e cor de fundo
+### Ícone da lixeira: Excluí uma determinada figura
+### Ícone da Tinta: Modifica a cor de fundo de uma figura
 
 
 

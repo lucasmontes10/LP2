@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javax.swing.JFileChooser;
+
 import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ import toolbox.*;
 //Avanços:
 //Salvando em arquivo
 //Ajustando a toolbar e os botões
+//Colocando mais funcionalidades no menu
+
 
 
 public class App {
@@ -301,13 +305,22 @@ class ListFrame extends JFrame{
                         }
                         repaint();
                     }
-                    if( evt.getKeyChar() == 'l' ){
-                        figs.add(new Losangulo(xAtual - w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                    // if( evt.getKeyChar() == 'l' ){
+                    //     figs.add(new Losangulo(xAtual - w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
+                    //     if (figs.size() > 1){
+                    //         focus = figs.get(figs.size() - 1);
+                    //         figs.remove(focus);
+                    //         figs.add(focus);
+                    //     }                        
+                    //     repaint();
+                    // }
+                    if (evt.getKeyChar() == 'u'){
+                        figs.add( new Superelipse(xAtual- w / 2, yAtual - h / 2, w, h, new Color(r_line, g_line, b_line), new Color(r_back, g_back, b_back)) );
                         if (figs.size() > 1){
                             focus = figs.get(figs.size() - 1);
                             figs.remove(focus);
                             figs.add(focus);
-                        }                        
+                        }
                         repaint();
                     }
                     if (evt.getKeyChar() == 't'){
@@ -412,6 +425,16 @@ class ListFrame extends JFrame{
                                 i = 0;
                             }
                         }
+
+                        if( evt.getKeyChar() == 's'){
+					        JFileChooser fileChooser = new JFileChooser();
+					        fileChooser.setDialogTitle("Salvar no formato SVG. Defina o local e o nome do arquivo");   
+					        int userSelection = fileChooser.showSaveDialog(null);
+ 					        if (userSelection == JFileChooser.APPROVE_OPTION){
+						        File fileToSave = fileChooser.getSelectedFile();
+						        criarSVG(figs, fileToSave.getAbsolutePath());
+					        }
+				        }
                         repaint();
                     }
 			    }
@@ -444,4 +467,58 @@ class ListFrame extends JFrame{
         //Desenhar o retangulo em volta da figura selecionada
         g2d.drawRect(focus.x - 5, focus.y - 5, focus.w + 10, focus.h + 10);
     }
+
+    public void criarSVG(ArrayList<Figures> figs, String fileName){
+		String format = ".svg";
+		try{
+      		File Stream = new File(fileName + format );
+
+      		if (!Stream.createNewFile() ) {
+      			System.out.println("Arquivo já existe\n");
+      		}
+
+      		FileWriter Writer = new FileWriter(fileName+format);
+      		Writer.write("<svg width=\"1500\" height=\"1000\">\n");
+
+      		Writer.write(" <rect width=\"100%\" height=\"100%\" fill=\"white\" />\n");
+
+      		for(Figures fig: figs){
+				String ForergbColor = String.format("rgb(%d,%d,%d)", fig.colorLine.getRed(),  fig.colorLine.getGreen(), fig.colorLine.getBlue());
+				String BackrgbColor = String.format("rgb(%d,%d,%d)", fig.colorBack.getRed(), fig.colorBack.getGreen(), fig.colorBack.getBlue());
+				if(fig instanceof Rect){
+					Writer.write("<rect x=\""+ fig.x +"\" y=\""+ fig.y +"\" width=\""+ fig.w +
+					"\" height=\"" + fig.h + "\" style=\"fill:"+ BackrgbColor +
+					";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");
+				}
+				else if( fig instanceof Superelipse){
+					Writer.write("<rect x=\""+ fig.x +"\" y=\""+ fig.y +
+					"\" rx=\"10\" ry=\"10\" width=\""+ fig.w +
+					"\" height=\"" + fig.h + "\" style=\"fill:"+ BackrgbColor +
+					";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");
+				}
+				else if( fig instanceof Ellipse){
+					Writer.write("<ellipse cx=\""+ (fig.x + (fig.w*0.5)) +"\" cy=\""+ (fig.y + (fig.h*0.5))+ "\" rx=\""+ (fig.w*0.5) + "\"" +
+					" ry=\""+ (fig.h*0.5) + "\""+
+					" style=\"fill:"+ BackrgbColor +
+					";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");
+				}
+				else if( fig instanceof Triangulo){
+					String points = String.format("%d,%d %d,%d %d,%d",
+					 				  fig.x, fig.y,
+					 				  fig.x-(int)(fig.w/2.0), fig.y+fig.w,
+									  fig.x+(int)(fig.w/2.0), fig.y+fig.w);
+
+					Writer.write("<polygon points=\""+ points +"\" "+ 
+							"style=\"fill:"+ BackrgbColor +
+							";stroke-width:3;stroke:"+ ForergbColor +"\" />\n");	
+				}
+			}
+      		Writer.write("</svg>");
+      		Writer.close();
+    	}
+    	catch (IOException e){
+      		System.out.println("Ocorreu um erro.");
+      		e.printStackTrace();
+    	}
+	}
 }
