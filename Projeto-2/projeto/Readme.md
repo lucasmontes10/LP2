@@ -35,6 +35,7 @@
 
 ### Ícone da lixeira: Excluí uma determinada figura
 ### Ícone da Tinta: Modifica a cor de fundo de uma figura
+### Salvar em svg: Necessário alguns ajustes
 
 
 
