@@ -107,7 +107,8 @@ class ListFrame extends JFrame{
 		buttons.add(new Button_(3, new Ellipse(1, 2, 3, 4, Color.BLACK, Color.BLACK)) );
 		buttons.add(new Button_(4, new Triangulo(1, 2, 3, -1, Color.BLACK, Color.BLACK)) );
 		buttons.add(new Button_(5, new imageFIg("./icones/lixeira.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));  
-        buttons.add(new Button_(6, new imageFIg("./icones/lata-de-tinta.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));    
+        buttons.add(new Button_(6, new imageFIg("./icones/lata-de-tinta.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));  
+        buttons.add(new Button_(7, new imageFIg("./icones/svg.png", 1, 2, 3, 4, 2, 0, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0))));
 		mainToolbox = new Toolbox(10, 50, buttons);
         
         this.addWindowListener (
@@ -190,6 +191,29 @@ class ListFrame extends JFrame{
                                 focus.colorBack = novaCor;
                                 repaint();
                             }
+                        }
+                        else if(buttonId == 7){
+                            if (focus != null){
+                                try{
+                                    PrintWriter writer = new PrintWriter("proj.svg", "UTF-8");
+                                    String screen = String.format("<svg width=\"%d\" height=\"%d\" xmlns=\"http://www.w3.org/2000/svg\">", defaultW, defaultH);
+                                    String endScreen = "</svg>";
+                                    String backgroundColor = "<rect width=\"100%\" height=\"100%\" fill=\"rgb(0, 0, 0, 0.1)\" />";
+                                    writer.println(screen);
+                                    writer.println(backgroundColor);
+                                    for (Figures fig: figs){
+                                        if (fig.toString() != ""){
+                                            writer.println(fig.toString());
+                                        }
+                                    }
+                                    writer.println(endScreen);
+                                    writer.flush();
+                                    writer.close();
+                                }catch (Exception ex){
+                                    System.out.println("erro");
+                                }
+
+                            }    
                         }
                         buttonId = -1;
                         repaint();
